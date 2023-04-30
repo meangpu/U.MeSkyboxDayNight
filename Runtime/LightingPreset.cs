@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName="Light Preset", menuName="Scriptables/Light Preset", order=1)]
+[CreateAssetMenu(fileName = "Light Preset", menuName = "Meangpu/Light Preset", order = 1)]
 
 public class LightingPreset : ScriptableObject
 {
