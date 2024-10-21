@@ -7,11 +7,16 @@ namespace Meangpu.Skybox
     [ExecuteAlways]
     public class SkyboxLightByTime : MonoBehaviour
     {
+        [Header("light object")]
         [SerializeField] private Light DirectionalLight;
         [SerializeField] private SkyboxLightPreset Preset;
 
-        [SerializeField, Range(0, 24)] private float TimeOfDay;
+        [Header("Function")]
         [SerializeField] bool _useRealTime;
+        [SerializeField, Range(0, 24)] private float TimeOfDay;
+        [Header("Auto")]
+        [SerializeField] float _autoAddToTimerSpeed = 1;
+        [Header("Realtime")]
 
         [SerializeField] float _updateIntervalSecond = 60f;
         private float _nextUpdateTime;
@@ -31,7 +36,7 @@ namespace Meangpu.Skybox
                 }
                 else
                 {
-                    TimeOfDay += Time.deltaTime;
+                    TimeOfDay += Time.deltaTime * _autoAddToTimerSpeed;
                     TimeOfDay %= 24;
                 }
                 UpdateLight(TimeOfDay / 24f);
