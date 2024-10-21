@@ -1,5 +1,5 @@
 // Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
+// Available at the Unity Asset Store - http://u3d.as/y3X
 Shader "Skybox/Cubemap Extended"
 {
 	Properties
@@ -25,11 +25,11 @@ Shader "Skybox/Cubemap Extended"
 		[ASEEnd]_FogPosition("Fog Position", Float) = 0
 
 	}
-	
+
 	SubShader
 	{
-		
-		
+
+
 		Tags { "RenderType"="Background" "Queue"="Background" "PreviewType"="Skybox" }
 	LOD 0
 
@@ -42,16 +42,16 @@ Shader "Skybox/Cubemap Extended"
 		ColorMask RGBA
 		ZWrite Off
 		ZTest LEqual
-		
-		
-		
+
+
+
 		Pass
 		{
 			Name "Unlit"
 
 			CGPROGRAM
 
-			
+
 
 			#ifndef UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
 			//only defining to not throw compilation error over Unity 5.5
@@ -71,10 +71,10 @@ Shader "Skybox/Cubemap Extended"
 			{
 				float4 vertex : POSITION;
 				float4 color : COLOR;
-				
+
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
-			
+
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
@@ -108,9 +108,9 @@ Shader "Skybox/Cubemap Extended"
 			{
 				return DecodeHDR(Data, _Tex_HDR);
 			}
-			
 
-			
+
+
 			v2f vert ( appdata v )
 			{
 				v2f o;
@@ -136,9 +136,9 @@ Shader "Skybox/Cubemap Extended"
 				#endif
 				float3 vertexToFrag774 = staticSwitch1164;
 				o.ase_texcoord1.xyz = vertexToFrag774;
-				
+
 				o.ase_texcoord2 = v.vertex;
-				
+
 				//setting value to unused interpolator channels and avoid initialization warnings
 				o.ase_texcoord1.w = 0;
 				float3 vertexValue = float3(0, 0, 0);
@@ -158,7 +158,7 @@ Shader "Skybox/Cubemap Extended"
 				#endif
 				return o;
 			}
-			
+
 			fixed4 frag (v2f i ) : SV_Target
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
@@ -180,16 +180,14 @@ Shader "Skybox/Cubemap Extended"
 				#else
 				float4 staticSwitch1179 = CUBEMAP222;
 				#endif
-				
-				
+
+
 				finalColor = staticSwitch1179;
 				return finalColor;
 			}
 			ENDCG
 		}
 	}
-	CustomEditor "SkyboxExtendedShaderGUI"
-	
 	Fallback "Skybox/Cubemap"
 }
 /*ASEBEGIN
