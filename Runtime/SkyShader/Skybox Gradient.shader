@@ -1,5 +1,5 @@
 // Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
+// Available at the Unity Asset Store - http://u3d.as/y3X
 Shader "Skybox Gradient"
 {
 	Properties
@@ -11,11 +11,11 @@ Shader "Skybox Gradient"
 		[Toggle(_SCREENSPACE_ON)] _Screenspace("Screen space", Float) = 0
 
 	}
-	
+
 	SubShader
 	{
-		
-		
+
+
 		Tags { "RenderType"="Opaque" }
 	LOD 100
 
@@ -28,16 +28,16 @@ Shader "Skybox Gradient"
 		ZWrite On
 		ZTest LEqual
 		Offset 0 , 0
-		
-		
-		
+
+
+
 		Pass
 		{
 			Name "Unlit"
 			Tags { "LightMode"="ForwardBase" }
 			CGPROGRAM
 
-			
+
 
 			#ifndef UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX
 			//only defining to not throw compilation error over Unity 5.5
@@ -55,9 +55,9 @@ Shader "Skybox Gradient"
 				float4 vertex : POSITION;
 				float4 color : COLOR;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
-				
+
 			};
-			
+
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
@@ -75,7 +75,7 @@ Shader "Skybox Gradient"
 			uniform float _mult;
 			uniform float _pwer;
 
-			
+
 			v2f vert ( appdata v )
 			{
 				v2f o;
@@ -86,7 +86,7 @@ Shader "Skybox Gradient"
 				float4 ase_clipPos = UnityObjectToClipPos(v.vertex);
 				float4 screenPos = ComputeScreenPos(ase_clipPos);
 				o.ase_texcoord2 = screenPos;
-				
+
 				o.ase_texcoord1 = v.vertex;
 				float3 vertexValue = float3(0, 0, 0);
 				#if ASE_ABSOLUTE_VERTEX_POS
@@ -105,7 +105,7 @@ Shader "Skybox Gradient"
 #endif
 				return o;
 			}
-			
+
 			fixed4 frag (v2f i ) : SV_Target
 			{
 				UNITY_SETUP_INSTANCE_ID(i);
@@ -123,17 +123,14 @@ Shader "Skybox Gradient"
 				float staticSwitch13 = i.ase_texcoord1.xyz.y;
 				#endif
 				float4 lerpResult3 = lerp( _Bottom , _Top , pow( saturate( ( staticSwitch13 * _mult ) ) , _pwer ));
-				
-				
+
+
 				finalColor = lerpResult3;
 				return finalColor;
 			}
 			ENDCG
 		}
 	}
-	CustomEditor "ASEMaterialInspector"
-	
-	
 }
 /*ASEBEGIN
 Version=17900
