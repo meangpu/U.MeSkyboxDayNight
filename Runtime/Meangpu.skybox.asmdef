@@ -1,7 +1,9 @@
 {
     "name": "Meangpu.skybox",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:de13f8b1675b449e6a6af1cc0f7842ec"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
